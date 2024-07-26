@@ -8,7 +8,7 @@ let gitrowsOptions = {
     },
     owner: 'rolaksy',
     user: 'rolaksy',
-    token: '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',
+    token: '',
     branch: 'master',
     csv: { delimiter: ',' },
     cacheTTL: 1000, // You can tweak this value to have a custom cache validity time (3s here)
