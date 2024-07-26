@@ -50,7 +50,7 @@ router.get('/:table/validate', [
 
     const { body } = req;
     const response = await store.select(req.params.table, { email: body.email });
-    if(response !== null && Array.isArray(response)) {
+    if(response !== null && Array.isArray(response) && response.length > 0) {
         const user = response[0];
         if(user.email !== '' && user.key !== '') {
             return res.status(200).json({success: true});
