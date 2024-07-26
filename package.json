@@ -1,0 +1,29 @@
+{
+  "name": "ks-store",
+  "version": "1.0.0",
+  "description": "Kiwisecurity storage",
+  "main": "index.js",
+  "scripts": {
+    "start": "index.js"
+  },
+  "author": {
+    "name": "Laks Yalamati",
+    "email": "9laksy@gmail.com",
+    "url": "https://github.com/kiwisecurity"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "csv-parse": "^5.5.6",
+    "csv-stringify": "^6.5.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "node-fetch": "^3.3.2",
+    "yamljs": "^0.3.0"
+  }
+}
