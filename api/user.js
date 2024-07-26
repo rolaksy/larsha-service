@@ -5,9 +5,9 @@ const Store = require('../lib/store');
 const Util = require('../lib/util');
 const dotenv = require('dotenv');
 dotenv.config();
+
 const token = process.env.TOKEN || "";
 
-console.log(token);
 const store = new Store(token);
 
 //drop or create table
