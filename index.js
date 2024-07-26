@@ -6,7 +6,6 @@ const userApi = require('./api/user');
 const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT || 3000;
-console.log(VERCEL_ENV);
 
 app.use(express.json());
 
