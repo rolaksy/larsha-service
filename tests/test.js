@@ -8,7 +8,7 @@ let gitrowsOptions = {
     },
     owner: 'rolaksy',
     user: 'rolaksy',
-    token: '',
+    token: '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',
     branch: 'master',
     csv: { delimiter: ',' },
     cacheTTL: 1000, // You can tweak this value to have a custom cache validity time (3s here)
@@ -88,7 +88,7 @@ async function handleRequest()
     
     //update('users', dataToInsert, {"id": "100"});
 
-    //select('users', {"email": "9laksy@gmail.com"});
+    select('ks-users', {"email": "9laksy@gmail.com"});
 }
 
 
