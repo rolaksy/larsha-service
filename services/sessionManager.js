@@ -8,6 +8,7 @@ class SessionManager {
     constructor() {
         this.store = new Store();
         this.timezone = 'Pacific/Auckland';
+        this.object = 'ks-sessions';
     }
 
     static create() {
@@ -24,8 +25,8 @@ class SessionManager {
             expiry: moment().tz(this.timezone).add(10, 'minutes').toISOString()
         }
 
-        await this.store.remove('ks-sessions', {email: email});
-        return await this.store.insert('ks-sessions', _objSession);
+        const filter = {email: email};
+        return await this.store.update('ks-sessions', _objSession, filter);
     }
 
     async isSessionValid(sid) {
