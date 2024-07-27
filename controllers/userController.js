@@ -38,11 +38,12 @@ class UserController extends BaseController{
         if(result !== null && Array.isArray(result) && result.length > 0) {
             const user = result[0];
             if(decrypt(user.key) === this.password) {
-                await sessionManager.create().setSession(this.email);
+                const sid = await sessionManager.create().setSession(this.email);
                 return this.response.success({
                     email: user.email,
                     firstname: user.firstname,
-                    lastname: user.lastname
+                    lastname: user.lastname,
+                    token: sid
                 });
             } else {
                 return this.response.error("Invalid email or password");

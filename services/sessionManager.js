@@ -18,10 +18,10 @@ class SessionManager {
     async setSession(email) {
         if(_.isEmpty(email))
             return false;
-
+        const sid = encrypt(email);
         const _objSession = {
             email: email,
-            sid: encrypt(email),
+            sid: sid,
             expiry: moment().tz(this.timezone).add(10, 'minutes').toISOString()
         }
 
@@ -30,7 +30,8 @@ class SessionManager {
         if(ex && Array.isArray(ex) && ex.length > 0) {
             await this.store.remove(this.object, filter);
         }
-        return await this.store.insert(this.object, _objSession, filter);
+        await this.store.insert(this.object, _objSession, filter);
+        return sid;
     }
 
     async isSessionValid(sid) {
