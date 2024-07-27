@@ -26,7 +26,11 @@ class SessionManager {
         }
 
         const filter = {email: email};
-        return await this.store.update('ks-sessions', _objSession, filter);
+        const ex = await this.store.select(this.object, filter);
+        if(ex && Array.isArray(ex) && ex.length > 0) {
+            await this.store.remove(this.object, filter);
+        }
+        return await this.store.insert(this.object, _objSession, filter);
     }
 
     async isSessionValid(sid) {
