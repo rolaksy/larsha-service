@@ -1,31 +1,35 @@
 const Util = require('../lib/storeUtil');
+
 class ApiResponse {
     constructor(response) {
         this.response = response;
     }
 
-    success (dataOrMessage) {
-        return this.response.status(200).json(this.getFormattedData(dataOrMessage));
+    success(dataOrMessage) {
+        const responseData = this.getFormattedData(dataOrMessage);
+        return this.response.status(200).json(responseData);
     }
 
-    error (dataOrMessage) {
-        return this.response.status(200).json(this.getFormattedData(dataOrMessage, false));
+    error(dataOrMessage) {
+        const responseData = this.getFormattedData(dataOrMessage, false);
+        return this.response.status(200).json(responseData);
     }
 
-    getFormattedData (dataOrMessage, status = true, message = 'Success') {
+    getFormattedData(dataOrMessage, status = true, message = 'Success') {
         let data = {};
-        // Check if the first argument is a string, if so, it's the message and no data is provided
         if (typeof dataOrMessage === 'string') {
             message = dataOrMessage;
         } else {
             data = dataOrMessage;
         }
-        return {
+
+        const responseObject = {
             success: status,
             data: status ? data : {},
             errors: !status && !Util.isEmptyObjectArray(data) ? data : [],
             message: message || 'Success'
-        }
+        };
+        return responseObject;
     }
 }
 

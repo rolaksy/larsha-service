@@ -14,10 +14,12 @@ class AddressGrouperController extends BaseController{
     }
     
     async groupAddresses () {
-        console.log(this.addresses);
-        const addressGroups = await this.addressService.groupAddressesByRegion(this.addresses);
-        console.log(addressGroups);
-        return this.response.success("OK");
+        try {
+            const addressGroups = await this.addressService.groupAddressesByRegion(this.addresses);
+            return this.response.success(addressGroups);
+        } catch (error) {
+            return this.response.error(error.message || 'An error occurred while grouping addresses');
+        }
     }
 }
 

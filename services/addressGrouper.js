@@ -12,14 +12,18 @@ class AddressGrouper {
     }
 
     async groupAddressesByRegion(addresses) {
-        const groupedAddresses = [];
+        const groupedAddresses = {};
 
         for (const address of addresses) {
-            const { region, address: fullAddress } = await this._geocodeAddress(address);
+            const { region, address: fullAddress, coordinates } = await this._geocodeAddress(address);
             if (!groupedAddresses[region]) {
                 groupedAddresses[region] = [];
             }
-            groupedAddresses[region].push(fullAddress);
+            const item = {
+                address: fullAddress,
+                coordinates: coordinates
+            }
+            groupedAddresses[region].push(item);
         }
 
         return groupedAddresses;
@@ -38,7 +42,7 @@ class AddressGrouper {
                 const coordinates = feature.geometry.coordinates;
                 const region = this._determineRegion(coordinates);
                 const fullAddress = feature.place_name;
-                return { region, address: fullAddress };
+                return { region, address: fullAddress, coordinates: coordinates };
             } else {
                 console.error(`Geocoding error for address: ${address}`);
                 return 'Unknown Region';
