@@ -1,17 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const Store = require('../lib/store');
-const StoreUtil = require('../lib/storeUtil');
-const dotenv = require('dotenv');
 const ApiResponse = require('./ApiResponse');
 
 const UserController = require('../controllers/userController');
-
-dotenv.config();
-const token = process.env.TOKEN || "";
-const store = new Store(token);
-
 
 // Middleware to handle UserController initialization
 const initializeController = (req, res, next) => {

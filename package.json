@@ -17,6 +17,7 @@
     "nodemon": "^3.1.4"
   },
   "dependencies": {
+    "@turf/turf": "^7.0.0",
     "axios": "^1.7.2",
     "crypto": "^1.0.1",
     "csv-parse": "^5.5.6",
