@@ -1,6 +1,7 @@
 // index.js
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const userApi = require('./api/user');
 const addressApi = require('./api/addressgrouper');
 
@@ -9,6 +10,28 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+
+//configuring cors
+// Define a list of allowed origins
+const allowedOrigins = [
+  'http://localhost:3002', // Your local React app
+  'https://rolaksy.github.io/', // Your deployed site
+];
+
+const corsOptions = {
+  origin: function(origin, callback) {
+    if(!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS: Access denied'))
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
+
 
 // Middleware to check the Origin or Referer header
 const checkOrigin = (req, res, next) => {
